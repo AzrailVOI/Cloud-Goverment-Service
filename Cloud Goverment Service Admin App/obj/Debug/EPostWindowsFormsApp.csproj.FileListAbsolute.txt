@@ -1,0 +1,13 @@
+C:\Project\VS\EPost\EPostWindowsFormsApp\bin\Debug\EPostWindowsFormsApp.exe.config
+C:\Project\VS\EPost\EPostWindowsFormsApp\bin\Debug\EPostWindowsFormsApp.exe
+C:\Project\VS\EPost\EPostWindowsFormsApp\bin\Debug\EPostWindowsFormsApp.pdb
+C:\Project\VS\EPost\EPostWindowsFormsApp\obj\Debug\EPostWindowsFormsApp.csproj.AssemblyReference.cache
+C:\Project\VS\EPost\EPostWindowsFormsApp\obj\Debug\EPostWindowsFormsApp.csproj.SuggestedBindingRedirects.cache
+C:\Project\VS\EPost\EPostWindowsFormsApp\obj\Debug\EPostWindowsFormsApp.Login.resources
+C:\Project\VS\EPost\EPostWindowsFormsApp\obj\Debug\EPostWindowsFormsApp.Properties.Resources.resources
+C:\Project\VS\EPost\EPostWindowsFormsApp\obj\Debug\EPostWindowsFormsApp.csproj.GenerateResource.cache
+C:\Project\VS\EPost\EPostWindowsFormsApp\obj\Debug\EPostWindowsFormsApp.csproj.CoreCompileInputs.cache
+C:\Project\VS\EPost\EPostWindowsFormsApp\obj\Debug\EPostWindowsFormsApp.exe
+C:\Project\VS\EPost\EPostWindowsFormsApp\obj\Debug\EPostWindowsFormsApp.pdb
+C:\Project\VS\EPost\EPostWindowsFormsApp\obj\Debug\EPostWindowsFormsApp.MMenu.resources
+C:\Project\VS\EPost\EPostWindowsFormsApp\obj\Debug\EPostWindowsFormsApp.PassportTable.resources

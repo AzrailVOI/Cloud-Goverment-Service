@@ -1,0 +1,157 @@
+extends layout
+
+block content
+
+  header#head
+    .container
+      .row
+        .col-lg-12.col-sm-12.nav-bg
+          nav.navbar.navbar-expand-lg
+            .container-fluid
+              a.navbar-brand(href='/home')
+                img.navbar-logo(src='images/textlogo.webp' alt='')
+              button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation')
+                span.navbar-toggler-icon
+              #navbarNav.collapse.navbar-collapse
+                ul.navbar-nav
+                  li.nav-item
+                    a.nav-link.active(aria-current='page' href='/home') Home
+                  li.nav-item
+                    a.nav-link(href='#prising') Prising Plan
+                  li.nav-item
+                    a.nav-link(href='#faq') FAQ
+                  li.nav-item
+                    a.nav-link(href='#') All Services
+                  li.nav-item
+                    a.nav-link(href='#aboutus') About Us
+                .navbar-userlogo
+                  a.navbar-userlogo-link(href='/profile')
+                    img.navbar-userlogo-img(src='images/userlogo.webp' alt='')
+  section#sec1.sec1
+    .container
+      .row.sec1-row
+        .col-9.sec1-row-col
+          #carouselExampleDark.carousel.carousel-dark.slide(data-bs-ride='carousel')
+            .carousel-indicators
+              button.active(type='button' data-bs-target='#carouselExampleDark' data-bs-slide-to='0' aria-current='true' aria-label='Slide 1')
+              button(type='button' data-bs-target='#carouselExampleDark' data-bs-slide-to='1' aria-label='Slide 2')
+              button(type='button' data-bs-target='#carouselExampleDark' data-bs-slide-to='2' aria-label='Slide 3')
+            .carousel-inner
+              .carousel-item.active(data-bs-interval='10000')
+                img.d-block.w-100(src='images/new.jpg' alt='...')
+                .carousel-caption.d-none.d-md-block
+                  h5 First slide label
+                  p
+                    | Lorem, ipsum dolor sit amet, consectetur adipisicing elit. Sequi quibusdam dolorem optio!
+              .carousel-item(data-bs-interval='2000')
+                img.d-block.w-100(src='images/new.jpg' alt='...')
+                .carousel-caption.d-none.d-md-block
+                  h5 Second slide label
+                  p
+                    | Lorem ipsum dolor sit amet consectetur adipisicing, elit. Aliquam voluptas, vitae iusto!
+              .carousel-item
+                img.d-block.w-100(src='images/new.jpg' alt='...')
+                .carousel-caption.d-none.d-md-block
+                  h5 Third slide label
+                  p
+                    | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum cumque voluptas cum aspernatur.
+            button.carousel-control-prev(type='button' data-bs-target='#carouselExampleDark' data-bs-slide='prev')
+              span.carousel-control-prev-icon(aria-hidden='true')
+              span.visually-hidden Previous
+            button.carousel-control-next(type='button' data-bs-target='#carouselExampleDark' data-bs-slide='next')
+              span.carousel-control-next-icon(aria-hidden='true')
+              span.visually-hidden Next
+        .col-9.sec1-morenews
+          a.sec1-morenews-button(href='#') More News
+  section#aboutus.sec2
+    .container
+      .row.sec2-row
+        .col-9
+          .row.sec2-title
+            .sec2-title-imgblock.col-3
+              img.sec2-title-imgblock-image(src='images/logo.webp' alt='')
+            .sec2-title-text.col-4
+              | About Us
+        .col-7.sec2-subtitle
+          | Our company carries out advanced information tasks, namely the transfer of outdated and expensive paper workflow into a modern and convenient electronic format. Thanks to the transfer to electronic form, our customers save money both on the stationery itself and on employees, who will be needed much less for our system. Also important aspect is the speed of our system.
+        .col-7.sec2-results
+          #diag
+          .col-5.sec2-results-text
+            | According to our calculations, the transition to an electronic document management system allows you to save costs in the following areas
+  section#prising.sec3
+    .container
+      .row.sec3-row
+        .sec3-title Prising plan
+        .col-6.sec3-subtitle
+          | This price list is as close as possible to reality, since it is formed individually for each project.
+        .col-12
+        .col-7.sec3-pricecards
+          .row.row-cols-1.row-cols-md-3.g-4
+            .col
+              .card.h-100.sec3-pricecards-card
+                .sec3-pricecards-card-title
+                  h5.card-title.sec3-pricecards-card-title-text Basic
+                  h5.card-title.sec3-pricecards-card-title-text $100
+                .card-body.sec3-pricecards-card-body
+                  p.card-text You buy a basic electronic document management system.
+                  p.card-text No support. There are no integrators.
+                  .sec3-pricecards-card-btnDiv
+                    a.btn.btn-primary.sec3-pricecards-card-btnDiv-button(href='#') order now
+            .col
+              .card.h-100.sec3-pricecards-card
+                .sec3-pricecards-card-title
+                  h5.card-title.sec3-pricecards-card-title-text Standart
+                  h5.card-title.sec3-pricecards-card-title-text $300
+                .card-body.sec3-pricecards-card-body
+                  p.card-text
+                    | In addition to the basic electronic document management system, the cost of this version includes our integrators.
+                  .sec3-pricecards-card-btnDiv
+                    a.btn.btn-primary.sec3-pricecards-card-btnDiv-button(href='#') order now
+            .col
+              .card.h-100.sec3-pricecards-card
+                .sec3-pricecards-card-title
+                  h5.card-title.sec3-pricecards-card-title-text Premium
+                  h5.card-title.sec3-pricecards-card-title-text $700
+                .card-body.sec3-pricecards-card-body
+                  p.card-text
+                    | In addition to the basic version and our integrators, it includes ongoing support! That is, we can always help you in resolving issues related to our system.
+                  .sec3-pricecards-card-btnDiv
+                    a.btn.btn-primary.sec3-pricecards-card-btnDiv-button(href='#') order now
+  section#faq.sec4
+    .container
+      .row.sec4-row
+        .col-8
+          .sec4-title
+            | FAQ
+        .col-8.sec4-faq
+          #accordionPanelsStayOpenExample.accordion
+            .accordion-item
+              h2#panelsStayOpen-headingOne.accordion-header
+                button.accordion-button.collapsed.sec4-faq-block(type='button' data-bs-toggle='collapse' data-bs-target='#panelsStayOpen-collapseOne' aria-expanded='true' aria-controls='panelsStayOpen-collapseOne')
+                  | What is it for?
+              #panelsStayOpen-collapseOne.accordion-collapse.collapse(aria-labelledby='panelsStayOpen-headingOne')
+                .accordion-body
+                  | Thanks to the transfer to electronic form, our customers save money both on the office itself and on employees who will be needed much less for our system. Another important aspect is the speed of our system.
+            .accordion-item
+              h2#panelsStayOpen-headingTwo.accordion-header
+                button.accordion-button.collapsed.sec4-faq-block(type='button' data-bs-toggle='collapse' data-bs-target='#panelsStayOpen-collapseTwo' aria-expanded='false' aria-controls='panelsStayOpen-collapseTwo')
+                  | How it works?
+              #panelsStayOpen-collapseTwo.accordion-collapse.collapse(aria-labelledby='panelsStayOpen-headingTwo')
+                .accordion-body.row
+                  .col-5.sec4-faq-block-table
+                    .sec4-faq-block-table-imgDiv
+                      img.sec4-faq-block-table-imgDiv-image(src='images/schema-web-site.png' alt='')
+                    .sec4-faq-block-table-text
+                      | When working with a web service
+                  .col-7.sec4-faq-block-table
+                    .sec4-faq-block-table-imgDiv
+                      img.sec4-faq-block-table-imgDiv-image(src='images/schema-admin.png' alt='')
+                    .sec4-faq-block-table-text
+                      | Working with administration
+  footer#footer.footer
+    .container
+      .row.footer-row
+        .col-12
+          | Copyright &copy; 2022 -
+          span#copydate
+          |  by Cloud Goverment Service
