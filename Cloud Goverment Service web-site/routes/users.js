@@ -1,9 +1,13 @@
 var express = require('express');
 var router = express.Router();
 
+
 /* GET users listing. */
-  router.get('/', function(req, res, next) {
-    res.render('userlabel', { probel: " ",
+  router.get('/', async function(req, res, next) {
+    if (person.username === "" && person.password === ""){
+      res.redirect("/")
+    }else{
+      await res.render('userlabel', { probel: " ",
       middlename: middlename,
       uname: uname,
       lastname: lastname,
@@ -15,6 +19,8 @@ var router = express.Router();
       dateofissue: dateiss,
       authority: kem,
       itn: itn});
+    }
+
   });
 
 module.exports = router;

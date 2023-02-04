@@ -42,6 +42,11 @@ header{
     &-img{
       width: 100%;
     }
+    &-link{
+
+    display: flex;
+    justify-content: space-around;
+    }
   }
   &-nav{
     display: inline-flex;

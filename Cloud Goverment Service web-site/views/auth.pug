@@ -10,13 +10,14 @@ head
 .auth-logo-div-div
     .auth-logo-div
         img.auth-logo(src='images/logo.webp' alt='')
-form#auth(action='/profile' method='POST')
+form#auth(action='/' method='POST')
     .container
-        label
-            b Login
-        input#login(type='text' placeholder='Type login')
-        label
-            b Password
-        input#psw(type='password' placeholder='Type password')
-        button#btn(type='submit') &Vcy;&ocy;&jcy;&tcy;&icy; &vcy; &scy;&icy;&scy;&tcy;&iecy;&mcy;&ucy;
+        div
+            label
+                b Login
+            input#login(type='text' placeholder='Type login' name="uname")
+            label
+                b Password
+            input#psw(type='password' placeholder='Type password' name="pass")
+        input#btn(type='submit' value="Sign In")
 script(src='javascripts/auth.js')

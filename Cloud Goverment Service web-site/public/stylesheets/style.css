@@ -36,11 +36,21 @@ header {
   width: 100%;
 }
 .navbar-userlogo {
-  width: 75px;
+  width: 100px;
   margin-right: 20px;
 }
 .navbar-userlogo-img {
+  width: 150%;
+}
+.navbar-userlogo-img-exit {
+  height: 100%;
   width: 100%;
+  margin-left: 10px;
+}
+.navbar-userlogo-link{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 .navbar-nav {
   display: inline-flex;
