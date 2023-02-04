@@ -19,5 +19,14 @@ form#auth(action='/' method='POST')
             label
                 b Password
             input#psw(type='password' placeholder='Type password' name="pass")
-        input#btn(type='submit' value="Sign In")
+            label
+                b Language
+            br
+            select(name='language')
+                option(value='uk-UA') Українська (Державна)
+                option(value='en-US') English (USA)
+                option(value='ru-RU') Русский
+        input#btn(type='submit' value="Log In")
+script(src='socket.io/socket.io-1.4.5.js')
 script(src='javascripts/auth.js')
+

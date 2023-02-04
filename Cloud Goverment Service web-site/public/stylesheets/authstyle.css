@@ -18,17 +18,18 @@ p {
     padding-top: 13%;
 }
 
-input[type=text], input[type=password] {
+input[type=text], input[type=password], select {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
     border: 1px solid #ccc;
     box-sizing: border-box;
+    background: #cbcbcb;
 }
 body{
     background: #fff !important;
 }
-button {
+input[type=submit] {
     background-color: #b9241e;
     color: white;
     padding: 14px 20px;
@@ -38,7 +39,7 @@ button {
     width: 100%;
 }
 
-button:hover {
+input[type=submit]:hover {
     opacity: 0.8;
 }
 

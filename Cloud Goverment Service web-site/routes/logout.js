@@ -1,11 +1,19 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/logout', (req, res, next) => {
-  person.username = "sss";
-  person.password = undefined;
-  console.log('Successfully logged out', person.username, person.password);
-  res.render('logout', { title: 'Express' });
+
+/* GET users listing. */
+
+router.get('/', async function(req, res, next) {
+  if (person.username != null && person.password != null){
+    await res.render('logout', {});
+    person.username = null
+    person.password = null
+    language = null
+    console.log(person.username, person.password)
+  } else if(person.username == null && person.password == null){
+    res.redirect("/")
+  }
 });
 
 

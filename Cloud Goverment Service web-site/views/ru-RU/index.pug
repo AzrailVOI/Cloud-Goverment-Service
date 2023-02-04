@@ -1,0 +1,174 @@
+extends layout
+
+block content
+    div.mova
+        a#movaeng.mova-text(href="../en-US/home") English
+        a#movaderz.mova-text(href="../uk-UA/home") Державна
+        a#movaork.mova-text.mova-active(href="#") Русский
+    header#head
+        .container
+            .row
+                .col-lg-12.col-sm-12.nav-bg
+                    nav.navbar.navbar-expand-lg
+                        .container-fluid
+                            a.navbar-brand(href='#')
+                                img.navbar-logo(src='../images/textlogo.webp' alt='')
+                            button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation')
+                                span.navbar-toggler-icon
+                            #navbarNav.collapse.navbar-collapse
+                                ul.navbar-nav
+                                    li.nav-item
+                                        a.nav-link.active(aria-current='page' href='#') Главная
+                                    li.nav-item
+                                        a.nav-link(href='#prising') Наше жалованье
+                                    li.nav-item
+                                        a.nav-link(href='#faq') ФАКЬЮ
+                                    li.nav-item
+                                        a.nav-link(href='#') Все сервисы
+                                    li.nav-item
+                                        a.nav-link(href='#aboutus') Про нас
+                                .navbar-userlogo
+                                    a.navbar-userlogo-link(href='profile')
+                                        img.navbar-userlogo-img(src='../images/userlogo.webp' alt='')
+                                    a.navbar-userlogo-link(onclick="logOut();" href='/logout')
+                                        img.navbar-userlogo-img-exit(src='../images/exit.png' alt='')
+    section#sec1.sec1
+        .container
+            .row.sec1-row
+                .col-9.sec1-row-col
+                    #carouselExampleDark.carousel.carousel-dark.slide(data-bs-ride='carousel')
+                        .carousel-indicators
+                            button.active(type='button' data-bs-target='#carouselExampleDark' data-bs-slide-to='0' aria-current='true' aria-label='Slide 1')
+                            button(type='button' data-bs-target='#carouselExampleDark' data-bs-slide-to='1' aria-label='Slide 2')
+                            button(type='button' data-bs-target='#carouselExampleDark' data-bs-slide-to='2' aria-label='Slide 3')
+                        .carousel-inner
+                            .carousel-item.active(data-bs-interval='10000')
+                                img.d-block.w-100(src='../images/new.jpg' alt='...')
+                                .carousel-caption.d-none.d-md-block
+                                    h5#carh51 Слайд 1
+                                    p
+                                        | Lorem, ipsum dolor sit amet, consectetur adipisicing elit. Sequi quibusdam dolorem optio!
+                            .carousel-item(data-bs-interval='2000')
+                                img.d-block.w-100(src='../images/new.jpg' alt='...')
+                                .carousel-caption.d-none.d-md-block
+                                    h5#carh52 Слайд 2
+                                    p
+                                        | Lorem ipsum dolor sit amet consectetur adipisicing, elit. Aliquam voluptas, vitae iusto!
+                            .carousel-item
+                                img.d-block.w-100(src='../images/new.jpg' alt='...')
+                                .carousel-caption.d-none.d-md-block
+                                    h5#carh53 Слайд 3
+                                    p
+                                        | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum cumque voluptas cum aspernatur.
+                        button.carousel-control-prev(type='button' data-bs-target='#carouselExampleDark' data-bs-slide='prev')
+                            span.carousel-control-prev-icon(aria-hidden='true')
+                            span.visually-hidden Previous
+                        button.carousel-control-next(type='button' data-bs-target='#carouselExampleDark' data-bs-slide='next')
+                            span.carousel-control-next-icon(aria-hidden='true')
+                            span.visually-hidden Next
+                .col-9.sec1-morenews
+                    a#morenews1.sec1-morenews-button(href='#' onclick="alert(`Сервис заблокирован в вашей стране`)") Больше новостей
+                        span &#32;
+                        s богу новостей!
+    section#aboutus.sec2
+        .container
+            .row.sec2-row
+                .col-9
+                    .row.sec2-title
+                        .sec2-title-imgblock.col-3
+                            img.sec2-title-imgblock-image(src='../images/logo.webp' alt='')
+                        #onas1.sec2-title-text.col-4
+                            | Про нас
+                #onas2.col-7.sec2-subtitle
+                    | Наша компания выполняет передовые информационные задачи, а именно перевод устаревшего и дорогого бумажного документооборота в современный и удобный электронный формат. Благодаря переводу в электронный вид наши клиенты экономят деньги как на самой канцелярии, так и на сотрудниках, которые для нашей системы будут нужны намного меньше. Также важным аспектом является скорость нашей системы.
+                .col-7.sec2-results
+                    #diag
+                    #onas3.col-5.sec2-results-text
+                        | По нашим расчетам переход на систему электронного документооборота позволяет сэкономить затраты по таким направлениям.
+    section#prising.sec3
+        .container
+            .row.sec3-row
+                #pris1.sec3-title Наше жалованье
+                #pris2.col-6.sec3-subtitle
+                    | Данный прайс-лист максимально приближен к реальности, так как формируется индивидуально для каждого проекта.
+                .col-12
+                .col-7.sec3-pricecards
+                    .row.row-cols-1.row-cols-md-3.g-4
+                        .col
+                            .card.h-100.sec3-pricecards-card
+                                .sec3-pricecards-card-title
+                                    h5#prish51.card-title.sec3-pricecards-card-title-text Это БАЗА
+                                    h5.card-title.sec3-pricecards-card-title-text
+                                        span#prisd1
+                                            s $100
+                                        div#prisg1 Сотня зеленых
+                                .card-body.sec3-pricecards-card-body
+                                    p#prist11.card-text Вы покупаете базированную систему электронного документооборота.
+                                    p#prist12.card-text НИКАКОЙ поддержки! НИКАКИХ инструкторов.
+                                    .sec3-pricecards-card-btnDiv
+                                        a.btn.btn-primary.sec3-pricecards-card-btnDiv-button(href='#' onclick="alert(`Эта услуга недоступна в вашей стране`)") отоварить сейчас
+                        .col
+                            .card.h-100.sec3-pricecards-card
+                                .sec3-pricecards-card-title
+                                    h5#prish52.card-title.sec3-pricecards-card-title-text Стандарт
+                                    h5.card-title.sec3-pricecards-card-title-text
+                                        span#prisd2
+                                            s $300
+                                        div#prisg2 ♂Сри хандред баггз♂
+                                .card-body.sec3-pricecards-card-body
+                                    p#prist2.card-text
+                                        | Помимо базированной системы электронного документооборота, в стоимость данной версии включены наши интеграторы (не рабы).
+                                    .sec3-pricecards-card-btnDiv
+                                        a.btn.btn-primary.sec3-pricecards-card-btnDiv-button(href='#' onclick="alert(`Эта услуга недоступна в вашей стране`)") отоварить сейчас
+                        .col
+                            .card.h-100.sec3-pricecards-card
+                                .sec3-pricecards-card-title
+                                    h5#prish53.card-title.sec3-pricecards-card-title-text Для вельких панов
+                                    h5.card-title.sec3-pricecards-card-title-text
+                                        span#prisd3
+                                            s $700
+                                        div#prisg3 3092,67 zł
+                                .card-body.sec3-pricecards-card-body
+                                    p#prist3.card-text
+                                        | Помимо базированной версии и наших инструкторов, в нее входит постоянная поддержка! То есть мы всегда можем помочь Вам в решении вопросов, связанных с нашей системой.
+                                    .sec3-pricecards-card-btnDiv
+                                        a.btn.btn-primary.sec3-pricecards-card-btnDiv-button(href='#' onclick="alert(`Эта услуга недоступна в вашей стране`)") отоварить сейчас
+    section#faq.sec4
+        .container
+            .row.sec4-row
+                .col-8
+                    #faqtitle.sec4-title
+                        | ФАКЬЮ
+                .col-8.sec4-faq
+                    #accordionPanelsStayOpenExample.accordion
+                        .accordion-item
+                            h2#panelsStayOpen-headingOne.accordion-header
+                                button#faqb1.accordion-button.collapsed.sec4-faq-block(type='button' data-bs-toggle='collapse' data-bs-target='#panelsStayOpen-collapseOne' aria-expanded='true' aria-controls='panelsStayOpen-collapseOne')
+                                    | На шо оно нам надо?
+                            #panelsStayOpen-collapseOne.accordion-collapse.collapse(aria-labelledby='panelsStayOpen-headingOne')
+                                #faqt1.accordion-body
+                                    | Благодаря переводу в электронный вид наши клиенты экономят деньги как на самом офисе, так и на сотрудниках, которые для нашей системы будут нужны гораздо меньше. Еще одним важным аспектом является скорость нашей системы.
+                        .accordion-item
+                            h2#panelsStayOpen-headingTwo.accordion-header
+                                button#faqb2.accordion-button.collapsed.sec4-faq-block(type='button' data-bs-toggle='collapse' data-bs-target='#panelsStayOpen-collapseTwo' aria-expanded='false' aria-controls='panelsStayOpen-collapseTwo')
+                                    | Ну шо, как фурычит?
+                            #panelsStayOpen-collapseTwo.accordion-collapse.collapse(aria-labelledby='panelsStayOpen-headingTwo')
+                                .accordion-body.row
+                                    .col-5.sec4-faq-block-table
+                                        .sec4-faq-block-table-imgDiv
+                                            img.sec4-faq-block-table-imgDiv-image(src='../images/webschemeru.png' alt='схема сайт.png')
+                                        #faqt21.sec4-faq-block-table-text
+                                            | При работе с веб-сервисом
+                                    .col-7.sec4-faq-block-table
+                                        .sec4-faq-block-table-imgDiv
+                                            img.sec4-faq-block-table-imgDiv-image(src='../images/adminschemeru.png' alt='схема админа.png')
+                                        #faqt22.sec4-faq-block-table-text
+                                            | Работа с администрацией
+    footer#footer.footer
+        .container
+            .row.footer-row
+                #copy.col-12
+                    | Копипрáво &copy; 2022 -
+                    span &#32;
+                    span#copydate
+                    |  Клауд Ґовермэнт сервисом

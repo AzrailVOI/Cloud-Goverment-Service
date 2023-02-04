@@ -3,10 +3,10 @@ var router = express.Router();
 /* GET home page. */
 
 router.get('/', function(req, res, next) {
-  if (person.username === undefined && person.password === undefined){
+  if (person.username == null && person.password == null){
       res.redirect("/")
   }else{
-    res.render('index', { title: 'Express' });
+      res.render('en-US/index')
   }
 });
 

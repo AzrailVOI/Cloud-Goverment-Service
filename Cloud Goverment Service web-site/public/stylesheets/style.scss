@@ -11,10 +11,32 @@ body{
   font-family: "Montserrat";
   font-weight: 300;
 }
+.mova{
+  position: fixed;
+  left: 50px;
+  top: 50px;
+  justify-content: flex-start;
+  align-items: center;
+  z-index: 999;
+  &-text{
+    display: block;
+    width: 100%;
+    font-weight: 500;
+    text-decoration: none;
+    color: #fff;
+    &:hover{
+      color: #fff;
+      text-decoration: underline;
+    }
+  }
+  &-active{
+    font-weight: 600;
+  }
+}
 header{
   position: fixed;
   width: 100%;
-  z-index: 99999999999999;
+  z-index: 99;
 }
 .active{
   color: #000;
@@ -39,13 +61,20 @@ header{
   &-userlogo{
     width: 75px;
     margin-right: 20px;
-    &-img{
-      width: 100%;
-    }
-    &-link{
-
     display: flex;
     justify-content: space-around;
+    align-items: center;
+    &-img{
+      width: 120%;
+      &-exit{
+        width: 130%;
+      }
+    }
+    &-link{
+      margin-right: 0px;
+      &:first-child{
+        margin-right: 15px;
+      }
     }
   }
   &-nav{

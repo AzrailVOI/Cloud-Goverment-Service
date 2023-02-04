@@ -30,46 +30,29 @@ window.onload = () => {
     });
 
 
-    google.charts.load('current', {'packages':['corechart']});
-    google.charts.setOnLoadCallback(drawChart);
 
-    function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-            ['Resources', 'Time'],
-            ['Stationery', .15],
-            ['Workers', .20],
-            ['Time', .65]
-        ]);
+    try {
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Рес', 'Час (гроші)'],
+                ['Канцелярія', .15],
+                ['Працівники', .20],
+                ['Час', .65]
+            ]);
 
-        var options = {'width':500, 'height':500};
+            var options = {'width': 600, 'height': 500};
 
-        var chart = new google.visualization.PieChart(document.getElementById('diag'));
-        chart.draw(data, options);
+            var chart = new google.visualization.PieChart(document.getElementById('diag'));
+            chart.draw(data, options);
+        }
+    } catch(error){
+        console.log(error)
     }
-
     let date = new Date()
     copydate.innerHTML = date.getFullYear()
 
+
+
 }
-/*
-function logOut() {
-
-
-    var xhr = new XMLHttpRequest();
-
-    xhr.open("POST", "/logout", true);
-
-    xhr.onreadystatechange = function() {
-        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-            console.log(xhr)
-            console.log("Variable reset successfully");
-        }
-    };
-
-    xhr.send();
-
-    setTimeout(()=>{
-        location.reload()
-    }, 500)
-}*/
-

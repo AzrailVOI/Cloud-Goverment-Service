@@ -2,11 +2,21 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var app = express();
+
+
+
 var authRouter = require('./routes/auth');
 var logout = require('./routes/logout')
-var app = express();
+var uausersRouter = require('./routes/uk-UA/users');
+var ruusersRouter = require('./routes/ru-RU/users');
+var enusersRouter = require('./routes/en-US/users');
+var authRouter = require('./routes/auth');
+var enindexRouter = require('./routes/en-US/index');
+var uaindexRouter = require('./routes/uk-UA/index');
+var ruindexRouter = require('./routes/ru-RU/index');
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -17,8 +27,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/home', indexRouter);
-app.use('/profile', usersRouter);
+app.use('/en-US/home', enindexRouter);
+app.use('/uk-UA/home', uaindexRouter);
+app.use('/ru-RU/home', ruindexRouter);
+app.use('/ru-RU/profile', ruusersRouter);
+app.use('/uk-UA/profile', uausersRouter);
+app.use('/en-US/profile', enusersRouter);
 app.use('/', authRouter);
 app.use('/logout', logout);
 // catch 404 and forward to error handler
@@ -37,6 +51,23 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
+
+global.language = null
+
+global.middlename = {ua: "", ru: '', en: ''}
+global.uname = {ua: "", ru: '', en: ''}
+global.lastname = {ua: "", ru: '', en: ''}
+global.dayofbirth = ''
+global.nationality = {ua: "", ru: '', en: ''}
+global.docnum = ''
+global.dateex = ''
+global.dateiss = ''
+global.kem = {ua: "", ru: '', en: ''}
+global.itn = ''
+global.sexText = {ua: "", ru: '', en: ''}
+
 
 
 module.exports = app;

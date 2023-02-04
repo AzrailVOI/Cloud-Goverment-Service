@@ -8,10 +8,33 @@ body {
   font-weight: 300;
 }
 
+.mova {
+  position: fixed;
+  left: 50px;
+  top: 50px;
+  justify-content: flex-start;
+  align-items: center;
+  z-index: 999;
+}
+.mova-text {
+  display: block;
+  width: 100%;
+  font-weight: 500;
+  text-decoration: none;
+  color: #fff;
+}
+.mova-text:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+.mova-active {
+  font-weight: 600;
+}
+
 header {
   position: fixed;
   width: 100%;
-  z-index: 99999999999999;
+  z-index: 99;
 }
 
 .active {
@@ -36,21 +59,23 @@ header {
   width: 100%;
 }
 .navbar-userlogo {
-  width: 100px;
+  width: 75px;
   margin-right: 20px;
-}
-.navbar-userlogo-img {
-  width: 150%;
-}
-.navbar-userlogo-img-exit {
-  height: 100%;
-  width: 100%;
-  margin-left: 10px;
-}
-.navbar-userlogo-link{
   display: flex;
   justify-content: space-around;
   align-items: center;
+}
+.navbar-userlogo-img {
+  width: 120%;
+}
+.navbar-userlogo-img-exit {
+  width: 130%;
+}
+.navbar-userlogo-link {
+  margin-right: 0px;
+}
+.navbar-userlogo-link:first-child {
+  margin-right: 15px;
 }
 .navbar-nav {
   display: inline-flex;
