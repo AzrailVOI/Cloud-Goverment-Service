@@ -4,7 +4,7 @@ var router = express.Router();
 
 /* GET users listing. */
   router.get('/', async function(req, res, next) {
-    if (person.username === "" && person.password === ""){
+    if (person.username === undefined && person.password === undefined){
       res.redirect("/")
     }else{
       await res.render('userlabel', { probel: " ",

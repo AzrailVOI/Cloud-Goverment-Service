@@ -51,4 +51,25 @@ window.onload = () => {
     copydate.innerHTML = date.getFullYear()
 
 }
+/*
+function logOut() {
+
+
+    var xhr = new XMLHttpRequest();
+
+    xhr.open("POST", "/logout", true);
+
+    xhr.onreadystatechange = function() {
+        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+            console.log(xhr)
+            console.log("Variable reset successfully");
+        }
+    };
+
+    xhr.send();
+
+    setTimeout(()=>{
+        location.reload()
+    }, 500)
+}*/
 

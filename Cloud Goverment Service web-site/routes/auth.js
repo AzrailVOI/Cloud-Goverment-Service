@@ -15,13 +15,13 @@ var users = [
     }
 ]
 global.person = user
-person.username = ""
-person.password = ""
+person.username = undefined
+person.password = undefined
 router.get('/', function(req, res, next) {
     res.render('auth', { });
 });
 router.post('/', async (req, res, next) => {
-    await console.log(req.body.uname , req.body.pass);
+    await console.log("User " + req.body.uname + " " + req.body.pass);
     person.username = req.body.uname
     person.password = req.body.pass
     /*users.map((oneUser)=>{
