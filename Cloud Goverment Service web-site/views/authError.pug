@@ -10,13 +10,13 @@ head
 .auth-logo-div-div
     .auth-logo-div
         img.auth-logo(src='images/logo.webp' alt='')
-form#auth(action="/authErr" method="POST")
+form#auth(action="/?loggingError" method="POST")
     .container
         div
             label
                 b Authorisation Error
             input(type="hidden" name="logErr" value='Logging error')
-        input#login(type='submit' value="Try again")
+        input#login(type='submit' value="Try again" onclick="tryAgain()")
 
 script(src='socket.io/socket.io-1.4.5.js')
 script(src='javascripts/auth.js')
