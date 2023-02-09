@@ -75,6 +75,27 @@ span.psw {
     justify-content: center;
     padding-top: 100px;
 }
+.incorrect{
+    font-size: 12pt;
+    color: #f44336;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.ft{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    /*background: red;*/
+    padding: 20px 100px;
+}
+.ft-cookies{
+    font-weight: 600;
+    font-size: 24pt;
+    padding-bottom: 20px;
+}
+.ft-cookies-text{
+    font-size: 12pt;
+}
 /* Change styles for span and cancel button on extra small screens */
 @media screen and (max-width: 300px) {
     span.psw {

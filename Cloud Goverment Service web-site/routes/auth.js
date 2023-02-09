@@ -21,7 +21,7 @@ router.get('/', function(req, res, next) {
     person.username = null
     person.password = null
     const { auth } = req.cookies;
-    if (auth.username != null && auth.password != null) {
+    if (auth != undefined && auth.username != null && auth.password != null) {
     // res.send(`Welcome, ${auth.username}. Your password is ${auth.password}.`);
         person.username = auth.username
         person.password = auth.password
@@ -115,43 +115,7 @@ router.post('/', async (req, res, next) => {
         }
     }else {
         let message = "Ошибка авторизации"
-        res.send(`
-        <!DOCTYPE html>
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <title>Authorization</title>
-  <link href="stylesheets/authstyle.css" rel="stylesheet" type="text/css">
-  <link href="stylesheets/style.css" rel="stylesheet" type="text/css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-  <link href="https://fonts.googleapis.com/css2?family=PT+Sans&amp;display=swap" rel="stylesheet">
-  <script>
-    alert('${message}');
-  </script>
-</head>
-<div class="auth-logo-div-div">
-  <div class="auth-logo-div"><img class="auth-logo" src="images/logo.webp" alt=""></div>
-</div>
-<form id="auth" action="/" method="POST">
-  <div class="container">
-    <div>
-      <label><b>Login</b></label>
-      <input id="login" type="text" placeholder="Type login" name="uname">
-      <label><b>Password</b></label>
-      <input id="psw" type="password" placeholder="Type password" name="pass">
-      <label><b>Language</b></label><br>
-      <select name="language">
-        <option value="uk-UA">Українська (Державна)</option>
-        <option value="en-US">English (USA)</option>
-        <option value="ru-RU">Русский</option>
-      </select>
-    </div>
-    <input id="btn" type="submit" value="Log In">
-  </div>
-</form>
-<script src="socket.io/socket.io-1.4.5.js"></script>
-<script src="javascripts/auth.js"></script>
-        `)
+        res.render('authError')
         // res.render("authError", {})
     }
 
