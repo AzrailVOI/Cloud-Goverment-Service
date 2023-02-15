@@ -57,7 +57,7 @@ router.get('/', function(req, res, next) {
             dateiss = '21.01.2021'
             kem = {ua: "Орган 1433", ru: 'Орган 1433', en: 'Agency 1433'}
             itn = '3435678899'
-            sexText = {ua: "чоловічий", ru: 'мужской', en: 'male'}
+            sexText = {ua: "чоловіча", ru: 'мужской', en: 'male'}
         } else if (person.username == "Taras") {
             middlename = {ua: "Григорович", ru: 'Григорьевич', en: 'Hryhorovych'}
             uname = {ua: "Тарас", ru: 'Тарас', en: 'Taras'}
@@ -69,7 +69,7 @@ router.get('/', function(req, res, next) {
             dateiss = '10.03.1861'
             kem = {ua: "Орган 1433", ru: 'Орган 1433', en: 'Agency 1433'}
             itn = '3848723154'
-            sexText = {ua: "чоловічий", ru: 'мужской', en: 'male'}
+            sexText = {ua: "чоловіча", ru: 'мужской', en: 'male'}
         }
   } else {
         if (person.username == null && person.password == null){
