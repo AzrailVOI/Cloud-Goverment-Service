@@ -1,0 +1,39 @@
+doctype html
+head
+    meta(http-equiv='Content-Type' content='text/html; charset=utf-8')
+    title Authorization
+    link(href='stylesheets/signupstyle.css' rel='stylesheet' type='text/css')
+    link(href='stylesheets/style.css' rel='stylesheet' type='text/css')
+    link(rel='preconnect' href='https://fonts.googleapis.com')
+    link(rel='preconnect' href='https://fonts.gstatic.com' crossorigin='')
+    link(href='https://fonts.googleapis.com/css2?family=PT+Sans&display=swap' rel='stylesheet')
+    link(rel="icon" type="image/png" href="../images/favicon.png")
+.auth-logo-div-div
+    .auth-logo-div
+        img.auth-logo(src='images/logo.webp' alt='')
+form#auth(action='/' method='POST')
+    .container
+        div
+            label
+                b Login
+            input#login(type='text' placeholder='Type login' name="uname")
+            label
+                b Password
+            input#psw(type='password' placeholder='Type password' name="pass")
+            label
+                b Language
+            br
+            select(name='language')
+                option(value='uk-UA') Українська (Державна)
+                option(value='en-US') English (USA)
+                option(value='ru-RU') Русский
+        input#btn(type='submit' value="Log In")
+        span.signup Don't have an account?sssssss
+            a.signup-link(href="signup") Create it
+
+footer.ft
+    div.ft-cookies Cookies
+    span.ft-cookies-text By using the site you agree to the use of cookies
+script(src='socket.io/socket.io-1.4.5.js')
+script(src='javascripts/auth.js')
+

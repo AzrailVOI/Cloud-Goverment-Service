@@ -5,7 +5,8 @@ var router = express.Router();
 /* GET users listing. */
 
 router.get('/', async function(req, res, next) {
-  if (person.username != null && person.password != null){
+  const { auth } = req.cookies;
+  if (auth != undefined && auth.username != null && auth.password != null){
     await res.cookie('auth', {username: null, password: null, language: null}, { maxAge: 900000, httpOnly: true });
     await res.render('logout', {});
     person.username = null

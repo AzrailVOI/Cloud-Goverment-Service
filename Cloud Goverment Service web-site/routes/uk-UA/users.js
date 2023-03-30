@@ -4,7 +4,8 @@ var router = express.Router();
 
 /* GET users listing. */
   router.get('/', async function(req, res, next) {
-    if (person.username == null && person.password == null){
+  const { auth } = req.cookies;
+  if (auth == undefined || auth.username == null && auth.password == null){
       res.redirect("/")
     }else{
       await res.render('uk-UA/userlabel', { probel: " ",

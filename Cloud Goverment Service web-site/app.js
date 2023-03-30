@@ -7,7 +7,7 @@ var app = express();
 
 
 var authRouter = require('./routes/auth');
-var logout = require('./routes/logout')
+var logout = require('./routes/logout');
 var uausersRouter = require('./routes/uk-UA/users');
 var ruusersRouter = require('./routes/ru-RU/users');
 var enusersRouter = require('./routes/en-US/users');
@@ -15,6 +15,8 @@ var authRouter = require('./routes/auth');
 var enindexRouter = require('./routes/en-US/index');
 var uaindexRouter = require('./routes/uk-UA/index');
 var ruindexRouter = require('./routes/ru-RU/index');
+var signup = require('./routes/signup');
+
 
 
 
@@ -35,6 +37,7 @@ app.use('/uk-UA/profile', uausersRouter);
 app.use('/en-US/profile', enusersRouter);
 app.use('/', authRouter);
 app.use('/logout', logout);
+app.use('/signup', signup);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

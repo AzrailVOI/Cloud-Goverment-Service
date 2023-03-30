@@ -52,7 +52,7 @@ input[type=submit]:hover {
 
 /* Add padding to containers */
 span.container {
-    size: 10 px;
+    size: 10px;
     padding: 10px;
 }
 
@@ -80,6 +80,16 @@ span.psw {
     color: #f44336;
     padding-top: 10px;
     padding-bottom: 10px;
+}
+.signup{
+    display: block;
+    font-size: 12pt;
+    width: 100%;
+}
+.signup-link{
+    display: inline-block;
+    margin-left: .5em;
+    color: #000;
 }
 .ft{
     position: fixed;

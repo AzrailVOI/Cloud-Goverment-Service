@@ -1,0 +1,142 @@
+INSERT INTO passport_info (
+  MiddleName_ua,
+  MiddleName_ru,
+  MiddleName_en,
+  FirstName_ua,
+  FirstName_ru,
+  FirstName_en,
+  LastName_ua,
+  LastName_ru,
+  LastName_en,
+  DayOfBirth,
+  Nationality_ua,
+  Nationality_ru,
+  Nationality_en,
+  DocumentNumber,
+  DateOfExpiry,
+  DateOfIssue,
+  Authority_ua,
+  Authority_ru,
+  Authority_en,
+  ITN,
+  Sex_ua,
+  Sex_ru,
+  Sex_en
+) VALUES (
+  'Ілліч',
+  'Ильич',
+  'Illych',
+  'Владислав',
+  'Владыслав',
+  'Vladyslav',
+  'Овчарук',
+  'Овчарук',
+  'Ovcharuk',
+  '2005-01-14',
+  'Україна',
+  'Украина',
+  'Ukraine',
+  '0071734223',
+  '2026-01-21',
+  '2021-01-21',
+  'Орган 1433',
+  'Орган 1433',
+  'Agency 1433',
+  '3435678899',
+  'чоловіча',
+  'мужской',
+  'male'
+);
+
+
+
+
+
+Одним из способов оптимизировать эту разницу языков может быть использование библиотеки для мультиязычности, такой как i18next. Эта библиотека позволяет создавать словари с переводами на разные языки и легко получать нужный перевод в зависимости от выбранного языка пользователя.
+
+Пример использования i18next:
+
+    Установка i18next через npm:
+
+npm install i18next
+
+Создание словаря с переводами на разные языки:
+
+json
+
+{
+  "ua": {
+    "middleName": "Ілліч",
+    "firstName": "Владислав",
+    "lastName": "Овчарук",
+    "nationality": "Україна",
+    "authority": "Орган 1433",
+    "sex": "чоловіча"
+  },
+  "ru": {
+    "middleName": "Ильич",
+    "firstName": "Владыслав",
+    "lastName": "Овчарук",
+    "nationality": "Украина",
+    "authority": "Орган 1433",
+    "sex": "мужской"
+  },
+  "en": {
+    "middleName": "Illych",
+    "firstName": "Vladyslav",
+    "lastName": "Ovcharuk",
+    "nationality": "Ukraine",
+    "authority": "Agency 1433",
+    "sex": "male"
+  }
+}
+
+Использование i18next в коде:
+
+javascript
+
+    const i18next = require('i18next');
+    const translation = i18next.init({
+      lng: 'ua', // выбранный язык
+      resources: { // словарь с переводами
+        ua: {
+          translation: {
+            middleName: 'Ілліч',
+            firstName: 'Владислав',
+            lastName: 'Овчарук',
+            nationality: 'Україна',
+            authority: 'Орган 1433',
+            sex: 'чоловіча'
+          }
+        },
+        ru: {
+          translation: {
+            middleName: 'Ильич',
+            firstName: 'Владыслав',
+            lastName: 'Овчарук',
+            nationality: 'Украина',
+            authority: 'Орган 1433',
+            sex: 'мужской'
+          }
+        },
+        en: {
+          translation: {
+            middleName: 'Illych',
+            firstName: 'Vladyslav',
+            lastName: 'Ovcharuk',
+            nationality: 'Ukraine',
+            authority: 'Agency 1433',
+            sex: 'male'
+          }
+        }
+      }
+    });
+
+    const MiddleName = translation.t('middleName');
+    const FirstName = translation.t('firstName');
+    const LastName = translation.t('lastName');
+    const Nationality = translation.t('nationality');
+    const Authority = translation.t('authority');
+    const Sex = translation.t('sex');
+
+Таким образом, использование библиотеки i18next позволяет значительно упростить и оптимизировать работу с различ
