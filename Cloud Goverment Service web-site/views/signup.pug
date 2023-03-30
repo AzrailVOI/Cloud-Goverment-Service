@@ -11,19 +11,26 @@ head
 .auth-logo-div-div
     .auth-logo-div
         img.auth-logo(src='images/logo.webp' alt='')
-form#auth(action='/' method='POST')
+form#auth(action='/signup' method='POST')
     .container
         div
             label
-                b Login
-            input#login(type='text' placeholder='Type login' name="uname")
+                b First Name
+            input#fname(type='text' placeholder='First Name' name="fname")
             label
-                b Password
-            input#psw(type='password' placeholder='Type password' name="pass")
+                b Middle Name
+            input#mname(type='text' placeholder='First Name' name="mname")
             label
-                b Language
+                b Last Name
+            input#lname(type='text' placeholder='First Name' name="lname")
+            label
+                b Your country
+            select(name='country')
+                each el in options_country
+                    option(value=el.code)= el.name
             br
             select(name='language')
+
                 option(value='uk-UA') Українська (Державна)
                 option(value='en-US') English (USA)
                 option(value='ru-RU') Русский

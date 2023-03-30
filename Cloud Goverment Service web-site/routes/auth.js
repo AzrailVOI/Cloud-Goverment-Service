@@ -6,17 +6,6 @@ var user = {
     username: this.username,
     password: this.password
 }
-/*
-var users = [
-    {
-        username: "Vlad",
-        password: "1234"
-    },
-    {
-        username: "Taras",
-        password: "1111"
-    }
-]*/
 global.person = user
 person.username = null
 person.password = null
@@ -119,8 +108,8 @@ router.post('/', async (req, res, next) => {
     const connection = mysql.createConnection({
         host: '127.0.0.1',
         port: '3306',
-        user: 'Vlad',
-        password: '1234',
+        user: 'Wlad',
+        password: 'QWErty1234',
         database: 'CGSDB1'
     });
     console.log('Con1nected!');
@@ -139,9 +128,6 @@ router.post('/', async (req, res, next) => {
             console.log(cheakAuth)
             console.log(results)
             let cheak = [];
-            //cheak = users.map((oneUser)=>{return oneUser.username === person.username && oneUser.password === person.password;})
-            //console.log(cheak)
-            //console.log(cheak.includes(true))
             console.log(cheakAuth, " sd")
             if (cheak.includes(true) || cheakAuth){
                 console.log("Proverka +")
@@ -179,20 +165,9 @@ router.post('/', async (req, res, next) => {
         } else {
             console.log('Пользователь не найден в таблице');
             cheakAuth = false;
+            res.render('authError')
         }
-    });/*
-    connection.query('SELECT * FROM users WHERE name = ? AND password = ?', [person.username, person.password], function (error, results, fields) {
-        if (error) throw error;
-
-        // Если результаты запроса не пусты, то пользователь существует в таблице
-        if (results.length > 0) {
-            console.log('Пользователь существует в таблице');
-            cheakAuth = true;
-        } else {
-            console.log('Пользователь не найден в таблице');
-            cheakAuth = false;
-        }
-    });*/
+    });
     connection.end();
 
 });
