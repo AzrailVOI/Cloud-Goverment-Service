@@ -4,7 +4,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var app = express();
 
-
+global.registration = {
+  status: 'new',
+  current_page: 1
+}
 
 var authRouter = require('./routes/auth');
 var logout = require('./routes/logout');

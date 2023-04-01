@@ -1,5 +1,7 @@
 var express = require('express');
 const mysql = require('mysql2');
+const socketio = require('socket.io')
+
 var router = express.Router();
 var user = {
     userid: this.userid,
@@ -11,6 +13,12 @@ person.username = null
 person.password = null
 person.userid = null
 router.get('/', function(req, res, next) {
+    //socket start
+    io.on('connection', socket=> {
+        console.log("New auth socket");
+        socket.emit('registration', registration)
+    })
+    //socket end
     person.username = null
     person.password = null
     person.userid = null
@@ -171,5 +179,7 @@ router.post('/', async (req, res, next) => {
     connection.end();
 
 });
+
+
 
 module.exports = router;

@@ -1,5 +1,5 @@
 const form = document.querySelector('.form-div')
-
+const body = document.getElementById('body')
 function page3(){
     return `
 <div>
@@ -20,6 +20,8 @@ function page3(){
 </div>
     `
 }
+
+
 function page1() {
     return `
 <div>
@@ -28,7 +30,8 @@ function page1() {
 </div>
 <div>
   <label><b>Create Password*</b></label>
-  <input class="form-input" id="password" type="password" name="password" required="required"/>
+  <input class="form-input" id="password" type="password" name="password"  required="required"/>
+  <span class="form-sublabel form-sublabel-password">*The password must be at least 8 characters long and contain both English letters and numbers.</span>
 </div>
 <div>
   <label><b>Your EMail*</b></label>
@@ -38,8 +41,8 @@ function page1() {
 }
 function page2() {
 
-    let form = document.querySelector('.form')
-    form.setAttribute('action', 'signup?page=3')
+    let formReal = document.querySelector('.form')
+    formReal.setAttribute('action', 'signup?page=3')
     return`
 <div>
   <label style="font-size: 15pt;"><b>Confirm your EMail*</b></label>
@@ -53,9 +56,10 @@ function page2() {
 </div>   
     `
 }
+
 /*
-form-input-confirm-times
-form-input-confirm-check
+form-input-error
+form-input-check
 form-input-confirm-sign-check
 form-input-confirm-sign-times
 */
@@ -81,4 +85,5 @@ if (pageNumber == 1){
     `)
 }else if(pageNumber == 3){
     form.insertAdjacentHTML('beforeend', page3())
+    submBut.value = 'Complete Sign Up'
 }

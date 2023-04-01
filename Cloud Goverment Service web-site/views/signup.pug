@@ -10,32 +10,37 @@ head
     link(rel='preconnect' href='https://fonts.gstatic.com' crossorigin='')
     link(href='https://fonts.googleapis.com/css2?family=PT+Sans&display=swap' rel='stylesheet')
     link(rel="icon" type="image/png" href="../images/favicon.png")
-.auth-logo-div-div
-    .auth-logo-div
-        //img.auth-logo(src='images/logo.webp' alt='')
-.container
-    div.pagetitle account creation
-form.form(method='POST')
+body#body
+    .auth-logo-div-div
+        .auth-logo-div
+            //img.auth-logo(src='images/logo.webp' alt='')
     .container
-        .form-div
 
-            //select.form-input.form-select(name='country')
-            //    each el in options_country
-            //        option(value=el.code)= el.name
-            br
-        //    select(name='language')
-        //
-        //        option(value='uk-UA') Українська (Державна)
-        //        option(value='en-US') English (USA)
-        //        option(value='ru-RU') Русский
-        //a#btn.form-input.form-btn(href="#" value="Continue" data-page='1') Continue
-        input#btn.form-input.form-btn(type="submit" data-page='1' value="Continue")
-        //span.signup Don't have an account?sssssss
-        //    a.signup-link(href="signup") Create it
+        div.pagetitle
+            i#backtologin.fa.fa-arrow-left.pagetitle-arrow(title="Back to Login page")
+            span account creation
+            div
+    form.form(method='POST')
+        .container
+            .form-div
 
-footer.ft
-    div.ft-cookies Cookies
-    span.ft-cookies-text By using the site you agree to the use of cookies
+                //select.form-input.form-select(name='country')
+                //    each el in options_country
+                //        option(value=el.code)= el.name
+                br
+            //    select(name='language')
+            //
+            //        option(value='uk-UA') Українська (Державна)
+            //        option(value='en-US') English (USA)
+            //        option(value='ru-RU') Русский
+            //a#btn.form-input.form-btn(href="#" value="Continue" data-page='1') Continue
+            input#btn.form-input.form-btn(type="submit" data-page='1' value="Continue")
+            //span.signup Don't have an account?sssssss
+            //    a.signup-link(href="signup") Create it
+
+    footer.ft
+        div.ft-cookies Cookies
+        span.ft-cookies-text By using the site you agree to the use of cookies
 script(type='module' src='/javascripts/signup/signup.js')
 script(type='module' src='/javascripts/signup/signupPages.js')
 script(src='/javascripts/socket.io.js')

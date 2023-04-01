@@ -1,5 +1,19 @@
 import {Select} from '../select/select.js'
 
+const params = new URLSearchParams(window.location.search);
+const pageNumber = params.get('page');
+if (history.pushState) {
+  history.pushState(null, null, location.href);
+  window.onpopstate = function() {
+    history.go(1);
+  };
+}
+let goback = document.getElementById('backtologin');
+goback.addEventListener('click', ()=>{
+  window.location.replace("/");
+})
+
+
 
 
 const socket = io();
@@ -33,8 +47,42 @@ function createSelect(countries) {
 
 }
 
-const params = new URLSearchParams(window.location.search);
-const pageNumber = params.get('page');
+
+
+var checkPass = false;
+if (pageNumber == 1){
+  document.addEventListener('DOMContentLoaded', function() {
+    var $password = document.getElementById('password')
+    var $form = document.querySelector('.form')
+    $form.removeAttribute('method')
+    btn.setAttribute('type', 'button')
+    console.log($password)
+    $password.addEventListener('input', () =>{
+      console.log("oi", $password.value)
+      const password = $password.value;
+      const hasLettersAndNumbers = /^(?=.*[a-zA-Z])(?=.*\d).+$/.test(password);
+      const isLengthValid = password.length >= 8;
+
+      if (hasLettersAndNumbers && isLengthValid) {
+        $password.classList.remove('form-input-error')
+        $password.classList.add('form-input-check')
+        $form.setAttribute('method', 'POST')
+        btn.setAttribute('type', 'submit')
+        checkPass = true
+      } else {
+        $password.classList.remove('form-input-check')
+        $password.classList.add('form-input-error')
+        $form.removeAttribute('method')
+        btn.setAttribute('type', 'button')
+        checkPass = false
+      }
+    })
+  })
+}
+
+
+
+
 console.log("ss", pageNumber)
 if (pageNumber == 1){
   var userData1={
@@ -60,15 +108,15 @@ if (Number(pageNumber) === 2){
     if (code){
       confirmedEmail = true
       document.getElementById('times').classList.remove('form-input-confirm-sign-times')
-      document.getElementById('confirm_email').classList.remove('form-input-confirm-times')
+      document.getElementById('confirm_email').classList.remove('form-input-error')
       document.getElementById('check').classList.add('form-input-confirm-sign-check')
-      document.getElementById('confirm_email').classList.add('form-input-confirm-check')
+      document.getElementById('confirm_email').classList.add('form-input-check')
     }else{
       confirmedEmail = false
       document.getElementById('check').classList.remove('form-input-confirm-sign-check')
-      document.getElementById('confirm_email').classList.remove('form-input-confirm-check')
+      document.getElementById('confirm_email').classList.remove('form-input-check')
       document.getElementById('times').classList.add('form-input-confirm-sign-times')
-      document.getElementById('confirm_email').classList.add('form-input-confirm-times')
+      document.getElementById('confirm_email').classList.add('form-input-times')
     }
   })
   window.addEventListener('load', function() {
@@ -107,6 +155,7 @@ window.onload = ()=>{
       var passInput = document.getElementById('password');
       var emailInput = document.getElementById('email');
 
+
       let userdata_local = JSON.parse(localStorage.getItem('userdata1'));
       console.log("f", userdata_local)
       userdata_local.login = loginInput.value
@@ -115,6 +164,7 @@ window.onload = ()=>{
       console.log("e", userdata_local)
       localStorage.setItem("userdata1", JSON.stringify(userdata_local));
       console.log("le", JSON.parse(localStorage.getItem('userdata1')))
+      socket.emit('email', emailInput.value)
 
     }
     if (Number(pageNumber) == 3){

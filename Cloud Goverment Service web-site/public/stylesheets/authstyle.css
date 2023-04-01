@@ -91,6 +91,12 @@ span.psw {
     margin-left: .5em;
     color: #000;
 }
+.signup-continue{
+    color: #b9241e;
+}
+.signup-continue *{
+    color: #b9241e;
+}
 .ft{
     position: fixed;
     bottom: 0;

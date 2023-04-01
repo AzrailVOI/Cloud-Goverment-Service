@@ -13,6 +13,12 @@ body {
   font-size: 20pt;
   text-align: center;
   font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.pagetitle-arrow {
+  cursor: pointer;
 }
 
 .form label {
@@ -35,14 +41,14 @@ body {
 .form-input:focus {
   outline: none;
 }
-.form-input-confirm {
-  position: relative;
+.form-input-error {
+  border: 0.16rem solid #b9241e;
 }
-.form-input-confirm-check {
+.form-input-check {
   border: 0.16rem solid #008800;
 }
-.form-input-confirm-times {
-  border: 0.16rem solid #b9241e;
+.form-input-confirm {
+  position: relative;
 }
 .form-input-confirm-sign {
   display: none;
@@ -90,6 +96,9 @@ body {
 .form-sublabel {
   font-size: 10pt;
   word-break: break-word;
+}
+.form-sublabel-password {
+  color: #b9241e;
 }
 .form-btn {
   background: #b9241e;

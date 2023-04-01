@@ -27,7 +27,12 @@ app.use(function(req, res, next) {
  */
 
 var server = http.createServer(app);
+
+/**
+ * Global objects
+ */
 global.io = socketio(server)
+
 /**
  * Listen on provided port, on all network interfaces.
  */

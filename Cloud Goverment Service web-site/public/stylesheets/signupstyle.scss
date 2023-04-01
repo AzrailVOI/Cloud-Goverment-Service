@@ -18,6 +18,12 @@ body{
   font-size: 20pt;
   text-align: center;
   font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  &-arrow{
+    cursor: pointer;
+  }
 }
 .form{
   & label{
@@ -41,20 +47,15 @@ body{
     &:focus{
       outline:none;
     }
+    &-error{
+      border:.16rem solid $red;
+    }
+    &-check{
+      border:.16rem solid $green;
+    }
     &-confirm{
       position: relative;
       //z-index: -1;
-      &-check{
-        //background: $green;
-        //color: $white;
-        border:.16rem solid $green;
-      }
-      &-times{
-        //background: $red;
-        //color: $white;
-        border:.16rem solid $red;
-
-      }
       &-sign{
         display: none;
         position: absolute;
@@ -109,7 +110,12 @@ body{
   &-sublabel{
     font-size: 10pt;
     word-break: break-word;
+    &-password{
+      color: $red;
+    }
+
   }
+
   &-btn{
     background: $red;
     color: $white;

@@ -16,6 +16,31 @@ const nodemailer = require('nodemailer');
 var confirmCode = 0;
 var confirmEmail = false
 var confirmError = 0;
+var emailAddress = ''
+var currentPage = registration.current_page;
+function mailHTML(code){
+    return `
+<div class="container" style="font-family: 'Montserrat'; font-weight: 300; font-size: 1.15em; width: 75%; margin: 0 auto;">
+    <h1 class="title" style="display: block; text-align: center; font-size: 2.1em; font-weight: 600;">Dear User!</h1>
+    <div class="text" style="font-size: 1em;">
+        <p>
+            Thank you for registering with Cloud Government Service. To confirm your email address and complete the registration process, you are required to enter the following confirmation code:
+        </p>
+        <div class="code-div" style="display: block; margin: 0 auto; width: 100%; text-align: center;">
+            <p class="code" style="display: inline-block; padding: 1rem 2rem; border: .3rem solid #000; border-radius: 2rem; font-size: 2.1em; font-weight: 600;">${code}</p>
+        </div>
+        <p>Please enter this code in the confirmation field.</p>
+        <p>If you have any questions or issues while using our service, please do not hesitate to contact our <a href="support" class="support" style="font-family: 'Montserrat'; font-weight: 300; font-size: 1em;">support team</a></p>
+        <div class="footer" style="margin-top: 2em;">
+            <span style="display: block; padding-top: .5em;">Best regards,</span>
+            <span style="display: block; padding-top: .5em; font-weight: 500;">Cloud Government Service Team</span>
+        </div>
+
+    </div>
+
+</div>
+    `
+}
 
 var userData={
     fname: this.fname,
@@ -31,8 +56,11 @@ var signupCompleted = false;
 router.get('/', async function(req, res, next) {
     const pageNumber = Number(req.query.page);
     console.log(`Страница номер ${req.query.page + "||" + pageNumber}`);
-
-    if (pageNumber === 3){
+    const isPage = pageNumber == currentPage
+    if (!isPage){
+        res.redirect(`/signup?page=${currentPage}`)
+    }
+    if (pageNumber === 3 && isPage){
         const cgsdb = await mysql.createConnection({
             host: '127.0.0.1',
             port: '3306',
@@ -49,7 +77,7 @@ router.get('/', async function(req, res, next) {
         var countriesSent = false;
     }
 
-    if (pageNumber === 2){
+    if (pageNumber === 2 && isPage){
         const cgsdb = await mysql.createConnection({
             host: '127.0.0.1',
             port: '3306',
@@ -63,15 +91,15 @@ router.get('/', async function(req, res, next) {
                 let randomCount = Math.floor(Math.random() * 900000) + 100000;
                 if (randomCount == el.confirm_code){
                     let randomCount = Math.floor(Math.random() * 900000) + 100000;
-                }else if (confirmError === 0){
+                }else if (confirmError === 0 && confirmCode == 0){
                     confirmCode = randomCount
                     userData.confirm_code = confirmCode
                 }
             })
-        console.log(confirmCode);
+        console.log(emailAddress, confirmCode);
 
 
-        /*
+
         const transporter = nodemailer.createTransport({
                 host: "smtp.mail.ru",
                 port: 465,
@@ -79,27 +107,28 @@ router.get('/', async function(req, res, next) {
                 auth: {
                     user: 'cloud-goverment-service@list.ru',
                     pass: 'usAb4m3XwZBpRmpgFrYS' }
-            },
-            {
-                from: 'Mailer Test <cloud-goverment-service@list.ru>'
             });
 
 // Определение объекта письма
         const mailOptions = {
             from: 'cloud-goverment-service@list.ru', // адрес электронной почты отправителя
-            to: `${userData.email}`, // адрес электронной почты получателя
-            subject: 'Test Node.js mail', // тема письма
-            text: 'Test' // текст письма
+            to: `${emailAddress}`, // адрес электронной почты получателя
+            subject: 'Confirm Code: Cloud Goverment Service', // тема письма
+            html: mailHTML(confirmCode)
         };
 
 // Отправка письма
-        transporter.sendMail(mailOptions, function(error, info){
-            if (error) {
-                console.log(error);
-            } else {
-                console.log('Письмо успешно отправлено: ' + info.response);
-            }
-        });*/
+        if (registration.status === 'new'){
+            transporter.sendMail(mailOptions, function(error, info){
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log('Письмо успешно отправлено: ' + info.response);
+                }
+            });
+            registration.status = 'continue'
+        }
+
     }
 
 
@@ -112,13 +141,16 @@ router.get('/', async function(req, res, next) {
     var typedCodeMsg = false;
     //SOCKET START
     var SignUpFormDataReceived = false
+    var sentMail = false;
+
     io.on('connection', socket=> {
-        console.log("New socket");
+        console.log("New signup socket");
 
         if (!countriesSent && pageNumber === 3) {
             socket.emit('countries', countries);
             countriesSent = true;
         }
+
         if (!SignUpFormDataReceived && confirmEmail==true){
             socket.on('signup', (data) => {
                 console.log('Response from server:', data);
@@ -154,7 +186,14 @@ router.get('/', async function(req, res, next) {
             typedCodeMsg = true
         }
 
+        if (!sentMail){
+            socket.on('email', (email)=>{
+                console.log("CE", confirmCode, email)
+                emailAddress = email
 
+                sentMail = true
+            })
+        }
 
 
 
@@ -163,13 +202,11 @@ router.get('/', async function(req, res, next) {
     })
     //SOCKET END
 
-
-
     if (req.query.page == undefined){
         res.redirect('/signup?page=1')
     }
 
-    if (pageNumber === 3){
+    if (pageNumber === 3 && isPage){
         if (confirmEmail == true){
             console.log("User data: ", userData, "SignUp:", signupCompleted)
             if (userData.login != undefined){
@@ -180,7 +217,7 @@ router.get('/', async function(req, res, next) {
                     password: 'QWErty1234',
                     database: 'CGSDB1'
                 });
-                await cgsdb.execute(`INSERT INTO users (name, password, email, confirm_code) VALUES ('${userData.login}', '${userData.password}', '${userData.email}', '${userData.confirm_code}')`);
+                // await cgsdb.execute(`INSERT INTO users (name, password, email, confirm_code) VALUES ('${userData.login}', '${userData.password}', '${userData.email}', '${userData.confirm_code}')`);
 
             }
 
@@ -198,12 +235,16 @@ router.get('/', async function(req, res, next) {
 router.post("/", async (req, res, next)=>{
     console.log('ok')
 
-    if (req.body.confirm_email != undefined){
+    if (req.body.confirm_email != undefined && currentPage == 2){
+        currentPage = 3
+        registration.current_page = 3
         res.redirect('/signup?page=3')
-    }else if (req.body.fname != undefined){
+    }else if (req.body.fname != undefined && currentPage == 3){
         res.redirect('/signup?page=3')
     }
-    else{
+    else if (currentPage == 1){
+        currentPage = 2
+        registration.current_page = 2
         res.redirect('/signup?page=2')
     }
 })
