@@ -23,6 +23,7 @@ var signup = require('./routes/signup');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+app.set('strict routing', false);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

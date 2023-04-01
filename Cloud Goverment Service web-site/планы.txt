@@ -1,4 +1,5 @@
 INSERT INTO passport_info (
+   user_id,
   MiddleName_ua,
   MiddleName_ru,
   MiddleName_en,
@@ -23,30 +24,46 @@ INSERT INTO passport_info (
   Sex_ru,
   Sex_en
 ) VALUES (
-  'Ілліч',
-  'Ильич',
-  'Illych',
-  'Владислав',
-  'Владыслав',
-  'Vladyslav',
-  'Овчарук',
-  'Овчарук',
-  'Ovcharuk',
-  '2005-01-14',
-  'Україна',
-  'Украина',
-  'Ukraine',
-  '0071734223',
-  '2026-01-21',
-  '2021-01-21',
-  'Орган 1433',
-  'Орган 1433',
-  'Agency 1433',
-  '3435678899',
+    3,
+  'Джон',
+  'Джон',
+  'John',
+  'Джо',
+  'Джо',
+  'Joe',
+  'Дое',
+  'Дое',
+  'Doe',
+  '14.03.2000',
+  'Німеччина',
+  'Германия',
+  'Germany',
+  '0071098723',
+  '12.09.2026',
+  '12.09.2020',
+  'Орган 1456',
+  'Орган 1456',
+  'Agency 1456',
+  '3438765899',
   'чоловіча',
   'мужской',
   'male'
 );
+
+
+
+
+Dear [Name],
+
+Thank you for registering with Cloud Government Service. To confirm your email address and complete the registration process, you are required to enter the following confirmation code: CGS2023.
+
+Please enter this code in the confirmation field.
+
+If you have any questions or issues while using our service, please do not hesitate to contact our support team.
+
+best regards,
+Cloud Government Service Team
+
 
 
 

@@ -2,45 +2,43 @@ doctype html
 head
     meta(http-equiv='Content-Type' content='text/html; charset=utf-8')
     title Authorization
-    link(href='stylesheets/signupstyle.css' rel='stylesheet' type='text/css')
-    link(href='stylesheets/style.css' rel='stylesheet' type='text/css')
+    link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css', rel='stylesheet', integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC', crossorigin='anonymous')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css', integrity='sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==', crossorigin='anonymous', referrerpolicy='no-referrer')
+    link(href='/stylesheets/style.css' rel='stylesheet' type='text/css')
+    link(href='/stylesheets/signupstyle.css' rel='stylesheet' type='text/css')
     link(rel='preconnect' href='https://fonts.googleapis.com')
     link(rel='preconnect' href='https://fonts.gstatic.com' crossorigin='')
     link(href='https://fonts.googleapis.com/css2?family=PT+Sans&display=swap' rel='stylesheet')
     link(rel="icon" type="image/png" href="../images/favicon.png")
 .auth-logo-div-div
     .auth-logo-div
-        img.auth-logo(src='images/logo.webp' alt='')
-form#auth(action='/signup' method='POST')
+        //img.auth-logo(src='images/logo.webp' alt='')
+.container
+    div.pagetitle account creation
+form.form(method='POST')
     .container
-        div
-            label
-                b First Name
-            input#fname(type='text' placeholder='First Name' name="fname")
-            label
-                b Middle Name
-            input#mname(type='text' placeholder='First Name' name="mname")
-            label
-                b Last Name
-            input#lname(type='text' placeholder='First Name' name="lname")
-            label
-                b Your country
-            select(name='country')
-                each el in options_country
-                    option(value=el.code)= el.name
-            br
-            select(name='language')
+        .form-div
 
-                option(value='uk-UA') Українська (Державна)
-                option(value='en-US') English (USA)
-                option(value='ru-RU') Русский
-        input#btn(type='submit' value="Log In")
-        span.signup Don't have an account?sssssss
-            a.signup-link(href="signup") Create it
+            //select.form-input.form-select(name='country')
+            //    each el in options_country
+            //        option(value=el.code)= el.name
+            br
+        //    select(name='language')
+        //
+        //        option(value='uk-UA') Українська (Державна)
+        //        option(value='en-US') English (USA)
+        //        option(value='ru-RU') Русский
+        //a#btn.form-input.form-btn(href="#" value="Continue" data-page='1') Continue
+        input#btn.form-input.form-btn(type="submit" data-page='1' value="Continue")
+        //span.signup Don't have an account?sssssss
+        //    a.signup-link(href="signup") Create it
 
 footer.ft
     div.ft-cookies Cookies
     span.ft-cookies-text By using the site you agree to the use of cookies
-script(src='socket.io/socket.io-1.4.5.js')
-script(src='javascripts/auth.js')
-
+script(type='module' src='/javascripts/signup/signup.js')
+script(type='module' src='/javascripts/signup/signupPages.js')
+script(src='/javascripts/socket.io.js')
+script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js', integrity='sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM', crossorigin='anonymous')
+script(src='https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js', integrity='sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p', crossorigin='anonymous')
+script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js', integrity='sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF', crossorigin='anonymous')

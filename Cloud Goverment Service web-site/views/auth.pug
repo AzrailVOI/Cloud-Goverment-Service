@@ -29,11 +29,11 @@ form#auth(action='/' method='POST')
                 option(value='ru-RU') Русский
         input#btn(type='submit' value="Log In")
         span.signup Don't have an account?
-            a.signup-link(href="signup") Create one
+            a.signup-link(href="signup?page=1") Create one
 
 footer.ft
     div.ft-cookies Cookies
     span.ft-cookies-text By using the site you agree to the use of cookies
-script(src='socket.io/socket.io-1.4.5.js')
+script(src='socket.io/socket.io.js')
 script(src='javascripts/auth.js')
 

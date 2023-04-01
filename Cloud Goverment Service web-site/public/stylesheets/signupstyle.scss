@@ -1,0 +1,226 @@
+$white: #fff;
+$height: 2.5em;
+$light-grey: #cbcbcb;
+$black: #000;
+$red: #b9241e;
+$green: #008800;
+
+body{
+  background: $white;
+}
+.container{
+  width: 40vw;
+}
+.pagetitle{
+  padding-top: 7vh;
+  padding-bottom: 1.2rem;
+  text-transform: capitalize;
+  font-size: 20pt;
+  text-align: center;
+  font-weight: 600;
+}
+.form{
+  & label{
+    display: block;
+    font-size: 10pt;
+    padding-top: 2.2em;
+	text-align: center;
+  }
+  &-input{
+    display: block;
+    height: $height;
+    //margin-left: 1rem;
+    width: 100%;
+    padding: .4rem .8rem;
+    //margin: 8px 0;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    background: $light-grey;
+    outline:none;
+	  border-radius: 0;
+    &:focus{
+      outline:none;
+    }
+    &-confirm{
+      position: relative;
+      //z-index: -1;
+      &-check{
+        //background: $green;
+        //color: $white;
+        border:.16rem solid $green;
+      }
+      &-times{
+        //background: $red;
+        //color: $white;
+        border:.16rem solid $red;
+
+      }
+      &-sign{
+        display: none;
+        position: absolute;
+        //z-index: 9;
+        top: 50%;
+        right: 2%;
+        transform: translateY(-50%);
+        &-check{
+          color: $black;
+          display: block;
+          animation: checkAnim .3s ease-in-out;
+        }
+        &-times{
+          color: $black;
+          display: block;
+          transform: translateX(0%) translateY(-50%);
+          animation: timesAnim .3s ease-in-out;
+        }
+        @keyframes checkAnim {
+          0% {
+            transform: translateY(-80%);
+
+          }
+          50%{
+            transform: translateY(-30%);
+
+          }
+          100% {
+            transform: translateY(-50%);
+
+          }
+        }
+        @keyframes timesAnim {
+          0% {
+            transform: translateX(-30%) translateY(-50%);
+          }
+          25%{
+            transform: translateX(30%) translateY(-50%);
+
+          }
+          75%{
+            transform: translateX(-30%) translateY(-50%);
+          }
+          100% {
+            transform: translateX(0%) translateY(-50%);
+
+          }
+        }
+      }
+    }
+  }
+  &-sublabel{
+    font-size: 10pt;
+    word-break: break-word;
+  }
+  &-btn{
+    background: $red;
+    color: $white;
+    margin-top: 5em;
+    text-align: center;
+    text-decoration: none;
+    &-confirm{
+      background: $light-grey;
+      margin-top: 2em;
+      color: $black;
+      &:hover{
+        background: rgba(0,0,0,.5);
+      }
+    }
+    &:hover{
+      color: $white;
+      opacity: 0.8;
+    }
+  }
+}
+
+.select{
+  width: 100%;
+  position: relative;
+  z-index: 999999;
+  background: $light-grey;
+  &.open{
+    .select-dropdown{
+      max-height: 20vh;
+      display: block;
+    }
+    .select-backdrop{
+      display: block !important;
+    }
+  }
+  &-input{
+    height: $height;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+  &-dropdown{
+    //display: none;
+    position: absolute;
+    top: $height;
+    left: 0;
+    right: 0;
+    overflow-y: auto;
+    background: $light-grey;
+    max-height: 0vh;
+    transition: max-height 0.3s ease-in-out;
+    .display_none{
+      display: none !important;
+    }
+  }
+  &-list{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+  &-backdrop{
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: transparent;
+    z-index: -1;
+
+  }
+  &-value{
+    user-select: none;
+  }
+  &-item{
+    padding: .5rem;
+    cursor: auto;
+    border-bottom: 1px solid $black;
+    user-select: none;
+    font-size: 10pt;
+    &.selected{
+      background: #737373;
+      color: $white;
+    }
+    &-hover{
+      cursor: pointer;
+      &:hover{
+        background: #dfdfdf;
+        color: $black;
+      }
+    }
+
+  }
+}
+
+
+
+
+.ft{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    /*background: red;*/
+    padding: 1rem 5rem;
+}
+.ft-cookies{
+    font-weight: 600;
+    font-size: 20pt;
+}
+.ft-cookies-text{
+    font-size: 12pt;
+}
