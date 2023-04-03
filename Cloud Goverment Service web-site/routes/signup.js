@@ -18,6 +18,7 @@ var confirmEmail = false
 var confirmError = 0;
 var emailAddress = ''
 var currentPage = registration.current_page;
+var completeSignUp = false
 function mailHTML(code){
     return `
 <div class="container" style="font-family: 'Montserrat'; font-weight: 300; font-size: 1.15em; width: 75%; margin: 0 auto;">
@@ -206,7 +207,7 @@ router.get('/', async function(req, res, next) {
         res.redirect('/signup?page=1')
     }
 
-    if (pageNumber === 3 && isPage){
+    if (pageNumber === 4 && isPage){
         if (confirmEmail == true){
             console.log("User data: ", userData, "SignUp:", signupCompleted)
             if (userData.login != undefined){
@@ -218,7 +219,14 @@ router.get('/', async function(req, res, next) {
                     database: 'CGSDB1'
                 });
                 // await cgsdb.execute(`INSERT INTO users (name, password, email, confirm_code) VALUES ('${userData.login}', '${userData.password}', '${userData.email}', '${userData.confirm_code}')`);
+                completeSignUp = true
+                console.log(pageNumber, completeSignUp)
 
+                if (completeSignUp){
+                    registration.status = 'complete'
+                    registration.name = `${userData.fname} ${userData.mname} ${userData.lname}`
+                    res.redirect('/')
+                }
             }
 
         }else{
@@ -227,6 +235,7 @@ router.get('/', async function(req, res, next) {
             res.redirect('/signup?page=2')
         }
     }
+
     res.render('signup')
 
 });
@@ -240,6 +249,8 @@ router.post("/", async (req, res, next)=>{
         registration.current_page = 3
         res.redirect('/signup?page=3')
     }else if (req.body.fname != undefined && currentPage == 3){
+        currentPage = 4
+        registration.current_page = 4
         res.redirect('/signup?page=3')
     }
     else if (currentPage == 1){

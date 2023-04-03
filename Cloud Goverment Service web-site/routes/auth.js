@@ -12,11 +12,17 @@ global.person = user
 person.username = null
 person.password = null
 person.userid = null
-router.get('/', function(req, res, next) {
+router.get('/', async function(req, res, next) {
+    console.log("sadas", registration.status)
+    regMessSent1 = true
+
     //socket start
     io.on('connection', socket=> {
         console.log("New auth socket");
+        console.log("sadas", registration.status)
         socket.emit('registration', registration)
+        regMessSent = true
+
     })
     //socket end
     person.username = null

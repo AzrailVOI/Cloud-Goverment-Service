@@ -6,7 +6,8 @@ var app = express();
 
 global.registration = {
   status: 'new',
-  current_page: 1
+  current_page: 1,
+  name: ''
 }
 
 var authRouter = require('./routes/auth');
