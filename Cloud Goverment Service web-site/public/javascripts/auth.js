@@ -1,11 +1,7 @@
 function tryAgain() {
   window.location.assign("/");
 }
-fetch('/')
-  .then(response => response.json())
-  .then(({ message }) => {
-    alert(message);
-  });
+
 if (history.pushState) {
   history.pushState(null, null, location.href);
   window.onpopstate = function() {

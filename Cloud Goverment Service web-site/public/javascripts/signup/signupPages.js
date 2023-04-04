@@ -26,16 +26,33 @@ function page1() {
     return `
 <div>
   <label><b>Create Login*</b></label>
-  <input class="form-input" id="login" type="text" name="login" required="required"/>
+  <div class="form-input-confirm">
+    <input class="form-input" id="login" type="text" name="login" required="required"/>
+    <i class="fa fa-check form-input-confirm-sign" id="check_lg"></i>
+    <i class="fa fa-times form-input-confirm-sign" id="times_lg"></i>
+  </div>
+  <span class="form-sublabel form-sublabel-email form-sublabel-opacity0" id="login_sublabel">*</span>
 </div>
 <div>
   <label><b>Create Password*</b></label>
-  <input class="form-input" id="password" type="password" name="password"  required="required"/>
-  <span class="form-sublabel form-sublabel-password">*The password must be at least 8 characters long and contain both English letters and numbers.</span>
+  <div class="form-input-confirm">
+    <input class="form-input" id="password" type="password" name="password"  required="required"/>
+    <i class="fa fa-check form-input-confirm-sign" id="check_pwd"></i>
+    <i class="fa fa-times form-input-confirm-sign" id="times_pwd"></i>
+  </div>
+  <span class="form-sublabel form-sublabel-password" id="pass_sublabel">*The password must be at least 8 characters long and contain both English letters and numbers.</span>
 </div>
 <div>
   <label><b>Your EMail*</b></label>
-  <input class="form-input" id="email" type="email" name="email" required="required"/>
+  <div class="form-input-confirm">
+    <input class="form-input form-input-confirm" id="email" type="email" name="email" required="required"/>
+    <i class="fa fa-check form-input-confirm-sign" id="check_em"></i>
+    <i class="fa fa-times form-input-confirm-sign" id="times_em"></i>
+  </div>
+  <span class="form-sublabel form-sublabel-email form-sublabel-opacity0" id="email_sublabel">*</span>
+  
+<!--  <button type="button" class="form-input form-btn form-btn-type_button" id="check_email">Check EMail availability</button>-->
+  
 </div>
     `
 }
@@ -47,7 +64,7 @@ function page2() {
 <div>
   <label style="font-size: 15pt;"><b>Confirm your EMail*</b></label>
   <div class="form-input-confirm">
-    <input class="form-input form-input-confirm"  id="confirm_email" type="text" name="confirm_email" required="required" placeholder="123456" oninput="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="6"/>
+    <input class="form-input form-input-confirm"  id="confirm_email" type="text" name="confirm_email" required="required" placeholder="123456" maxlength="6"/>
     <i class="fa fa-check form-input-confirm-sign" id="check"></i>
     <i class="fa fa-times form-input-confirm-sign" id="times"></i>
   </div>
@@ -67,12 +84,9 @@ form-input-confirm-sign-times
 
 for (let i = 0; i < 1; i++) {
     var submBut = document.getElementById('btn')
-    var pageNum = Number(submBut.dataset.page)
 }
-console.log(document.getElementById('btn').dataset.page)
 const params = new URLSearchParams(window.location.search);
 const pageNumber = params.get('page');
-console.log(Number(pageNumber))
 if (pageNumber == 1){
     form.insertAdjacentHTML('beforeend', page1())
     submBut.setAttribute('data-page', "2")
@@ -81,7 +95,7 @@ if (pageNumber == 1){
     submBut.setAttribute('data-page', "3")
     submBut.value = "Continue"
     submBut.insertAdjacentHTML('beforebegin', `
-    <button type="button" class="form-input form-btn form-btn-confirm" id="confirm_code">Confirm Code</button>
+    <button type="button" class="form-input form-btn form-btn-type_button" id="confirm_code">Confirm Code</button>
     `)
 }else if(pageNumber == 3){
     form.insertAdjacentHTML('beforeend', page3())

@@ -35,7 +35,7 @@ export class Select{
         this.#setup()
     }
     #render(){
-        console.log(this)
+        // console.log(this)
         if (this.el != undefined){
             const {placeholder, data} = this.options
             this.el.classList.add('select')
@@ -51,7 +51,7 @@ export class Select{
         }
     }
     clickHandler(event){
-        console.log("click")
+        // console.log("click")
         const {type} = event.target.dataset
         if (type === "input"){
             this.toggle()

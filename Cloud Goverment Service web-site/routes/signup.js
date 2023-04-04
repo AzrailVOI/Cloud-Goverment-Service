@@ -13,12 +13,23 @@ const nodemailer = require('nodemailer');
 * password for account: CGS1130node#
 * password for node.js: usAb4m3XwZBpRmpgFrYS
 * */
+var DBconnectionConfig = {
+            host: '127.0.0.1',
+            port: '3306',
+            user: 'Wlad',
+            password: 'QWErty1234',
+            database: 'CGSDB1'
+        }
+
 var confirmCode = 0;
 var confirmEmail = false
 var confirmError = 0;
 var emailAddress = ''
 var currentPage = registration.current_page;
 var completeSignUp = false
+var isEmailNotExists = false
+var isLoginNotExists = false
+var isPage1TypedCorrect = null
 function mailHTML(code){
     return `
 <div class="container" style="font-family: 'Montserrat'; font-weight: 300; font-size: 1.15em; width: 75%; margin: 0 auto;">
@@ -55,6 +66,7 @@ var userData={
 }
 var signupCompleted = false;
 router.get('/', async function(req, res, next) {
+    var cgsdb = await mysql.createConnection(DBconnectionConfig);
     const pageNumber = Number(req.query.page);
     console.log(`Страница номер ${req.query.page + "||" + pageNumber}`);
     const isPage = pageNumber == currentPage
@@ -62,13 +74,7 @@ router.get('/', async function(req, res, next) {
         res.redirect(`/signup?page=${currentPage}`)
     }
     if (pageNumber === 3 && isPage){
-        const cgsdb = await mysql.createConnection({
-            host: '127.0.0.1',
-            port: '3306',
-            user: 'Wlad',
-            password: 'QWErty1234',
-            database: 'CGSDB1'
-        });
+
         let [...cgsdirt] = await cgsdb.execute(`select * from users`);
         let [...countries_dirt] = await cgsdb.execute(`SELECT * FROM countries ORDER BY name;`);
         let cgsusers = cgsdirt[0]
@@ -78,59 +84,6 @@ router.get('/', async function(req, res, next) {
         var countriesSent = false;
     }
 
-    if (pageNumber === 2 && isPage){
-        const cgsdb = await mysql.createConnection({
-            host: '127.0.0.1',
-            port: '3306',
-            user: 'Wlad',
-            password: 'QWErty1234',
-            database: 'CGSDB1'
-        });
-        let [...confCodes] = await cgsdb.execute(`select email, confirm_code from users`);
-
-            confCodes[0].map((el)=>{
-                let randomCount = Math.floor(Math.random() * 900000) + 100000;
-                if (randomCount == el.confirm_code){
-                    let randomCount = Math.floor(Math.random() * 900000) + 100000;
-                }else if (confirmError === 0 && confirmCode == 0){
-                    confirmCode = randomCount
-                    userData.confirm_code = confirmCode
-                }
-            })
-        console.log(emailAddress, confirmCode);
-
-
-
-        const transporter = nodemailer.createTransport({
-                host: "smtp.mail.ru",
-                port: 465,
-                secure: true,
-                auth: {
-                    user: 'cloud-goverment-service@list.ru',
-                    pass: 'usAb4m3XwZBpRmpgFrYS' }
-            });
-
-// Определение объекта письма
-        const mailOptions = {
-            from: 'cloud-goverment-service@list.ru', // адрес электронной почты отправителя
-            to: `${emailAddress}`, // адрес электронной почты получателя
-            subject: 'Confirm Code: Cloud Goverment Service', // тема письма
-            html: mailHTML(confirmCode)
-        };
-
-// Отправка письма
-        if (registration.status === 'new'){
-            transporter.sendMail(mailOptions, function(error, info){
-                if (error) {
-                    console.log(error);
-                } else {
-                    console.log('Письмо успешно отправлено: ' + info.response);
-                }
-            });
-            registration.status = 'continue'
-        }
-
-    }
 
 
 
@@ -138,11 +91,15 @@ router.get('/', async function(req, res, next) {
 
 
 
+                                      /*SOCKET START*/
     var typedCode = 0;
     var typedCodeMsg = false;
-    //SOCKET START
     var SignUpFormDataReceived = false
     var sentMail = false;
+    var checkEmailMess = false;
+    var checkLoginMess = false;
+    var typedPage1Mess = false;
+    var typedPage1ErrMess = false;
 
     io.on('connection', socket=> {
         console.log("New signup socket");
@@ -186,22 +143,142 @@ router.get('/', async function(req, res, next) {
             })
             typedCodeMsg = true
         }
-
+        if (!checkEmailMess){
+            socket.on('checkEmail', async email=>{
+                let [...emails] = await cgsdb.execute(`select email from users`);
+                console.log("Emails: ", emails[0])
+                let isEmailInDB = false
+                for (let i = 0; i < emails[0].length; i++) {
+                    console.log('io', emails[0][i].email, email)
+                    if (emails[0][i].email == email){
+                        isEmailInDB = true
+                    }
+                }
+                if (!isEmailInDB){
+                    console.log('sent if')
+                    socket.emit('emailError', false)
+                    isEmailNotExists = true
+                }else if (isEmailInDB){
+                    console.log('sent else')
+                    socket.emit('emailError', true)
+                }
+            })
+            checkEmailMess = true
+        }
+        if (!checkLoginMess){
+            socket.on('checkLogin', async login =>{
+                let [...logins] = await cgsdb.execute(`select login from users`);
+                let isLoginInDB = false
+                for (let i = 0; i < logins[0].length; i++) {
+                    // console.log('login', logins[0][i].login, login)
+                    if (logins[0][i].login == login){
+                        isLoginInDB = true
+                    }
+                }
+                if (!isLoginInDB){
+                    socket.emit('loginError', false)
+                    isLoginNotExists = true
+                }else if (isLoginInDB){
+                    socket.emit('loginError', true)
+                }
+            })
+        }
         if (!sentMail){
             socket.on('email', (email)=>{
                 console.log("CE", confirmCode, email)
-                emailAddress = email
-
+                if (isEmailNotExists){
+                    emailAddress = email
+                }else{
+                    isEmailNotExists = false
+                    isLoginNotExists = false
+                }
                 sentMail = true
             })
+        }
+        if (!typedPage1ErrMess){
+            if (isPage1TypedCorrect === false && pageNumber == 1){
+                socket.emit('typedPage1Err', false)
+            }
+            typedPage1ErrMess = true
+        }
+        if (!typedPage1Mess){
+            socket.on('page1Typed', typeObj =>{
+                if (typeObj.emailType && typeObj.passType && typeObj.loginType){
+                    isPage1TypedCorrect = true
+                }else {
+                    isPage1TypedCorrect = false
+                }
+            })
+            typedPage1Mess = true
         }
 
 
 
 
 
+
+
     })
-    //SOCKET END
+                                      /*SOCKET END*/
+
+
+
+    console.log("After Socket",isEmailNotExists, 'page', pageNumber)
+    if (pageNumber === 2 && isPage && isEmailNotExists){
+
+        let [...confCodes] = await cgsdb.execute(`select email, confirm_code from users`);
+            confCodes[0].map((el)=>{
+                let randomCount = Math.floor(Math.random() * 900000) + 100000;
+                if (randomCount == el.confirm_code){
+                    let randomCount = Math.floor(Math.random() * 900000) + 100000;
+                }else if (confirmError === 0 && confirmCode == 0 && emailAddress != el.email){
+                    confirmCode = randomCount
+                    userData.confirm_code = confirmCode
+                }
+            })
+        console.log(emailAddress, confirmCode);
+
+
+        const transporter = nodemailer.createTransport({
+                host: "smtp.mail.ru",
+                port: 465,
+                secure: true,
+                auth: {
+                    user: 'cloud-goverment-service@list.ru',
+                    pass: 'usAb4m3XwZBpRmpgFrYS' }
+            });
+
+// Определение объекта письма
+        const mailOptions = {
+            from: 'cloud-goverment-service@list.ru', // адрес электронной почты отправителя
+            to: `${emailAddress}`, // адрес электронной почты получателя
+            subject: 'Confirm Code: Cloud Goverment Service', // тема письма
+            html: mailHTML(confirmCode)
+        };
+
+// Отправка письма
+        if (registration.status === 'new'){
+            transporter.sendMail(mailOptions, function(error, info){
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log('Письмо успешно отправлено: ' + info.response);
+                }
+            });
+            registration.status = 'continue'
+        }
+
+    }else if (pageNumber === 2 && isPage && !isEmailNotExists){
+        res.redirect('/signup?page=1')
+    }
+
+
+
+
+
+
+
+
 
     if (req.query.page == undefined){
         res.redirect('/signup?page=1')
@@ -211,20 +288,32 @@ router.get('/', async function(req, res, next) {
         if (confirmEmail == true){
             console.log("User data: ", userData, "SignUp:", signupCompleted)
             if (userData.login != undefined){
-                const cgsdb = await mysql.createConnection({
-                    host: '127.0.0.1',
-                    port: '3306',
-                    user: 'Wlad',
-                    password: 'QWErty1234',
-                    database: 'CGSDB1'
-                });
-                // await cgsdb.execute(`INSERT INTO users (name, password, email, confirm_code) VALUES ('${userData.login}', '${userData.password}', '${userData.email}', '${userData.confirm_code}')`);
+
+                // await cgsdb.execute(`INSERT INTO users (login, password, email, confirm_code) VALUES ('${userData.login}', '${userData.password}', '${userData.email}', '${userData.confirm_code}')`);
                 completeSignUp = true
                 console.log(pageNumber, completeSignUp)
 
                 if (completeSignUp){
                     registration.status = 'complete'
+                    registration.current_page = 1
                     registration.name = `${userData.fname} ${userData.mname} ${userData.lname}`
+                    confirmCode = 0;
+                    confirmEmail = false
+                    confirmError = 0;
+                    emailAddress = ''
+                    currentPage = registration.current_page;
+                    completeSignUp = false
+                    isEmailNotExists = false
+                    isLoginNotExists = false
+                    isPage1TypedCorrect = null
+                    typedCode = 0;
+                    typedCodeMsg = false;
+                    SignUpFormDataReceived = false
+                    sentMail = false;
+                    checkEmailMess = false;
+                    checkLoginMess = false;
+                    typedPage1Mess = false;
+                    typedPage1ErrMess = false;
                     res.redirect('/')
                 }
             }
@@ -254,9 +343,18 @@ router.post("/", async (req, res, next)=>{
         res.redirect('/signup?page=3')
     }
     else if (currentPage == 1){
-        currentPage = 2
-        registration.current_page = 2
-        res.redirect('/signup?page=2')
+
+        console.log('To Page 2?', isPage1TypedCorrect)
+        if (isPage1TypedCorrect){
+            currentPage = 2
+            registration.current_page = 2
+            res.redirect('/signup?page=2')
+
+        }else {
+            currentPage = 1
+            registration.current_page = 1
+            res.redirect('/signup?page=1')
+        }
     }
 })
 module.exports = router;

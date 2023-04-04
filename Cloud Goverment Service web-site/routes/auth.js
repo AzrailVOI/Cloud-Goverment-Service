@@ -12,18 +12,27 @@ global.person = user
 person.username = null
 person.password = null
 person.userid = null
+
 router.get('/', async function(req, res, next) {
     console.log("sadas", registration.status)
-    regMessSent1 = true
 
     //socket start
+    var isRegistrationSent = false
     io.on('connection', socket=> {
         console.log("New auth socket");
-        console.log("sadas", registration.status)
-        socket.emit('registration', registration)
-        regMessSent = true
-
+        if (!isRegistrationSent){
+            console.log("registration status", registration.status)
+            socket.emit('registration', registration)
+            registration.status = 'new'
+            registration.name = ''
+            isRegistrationSent = true
+        }
     })
+    // const isBrowser = !req.headers['user-agent'].includes('socket.io');
+    // if (isBrowser){
+    // console.log("qwertyu", registration.status)
+    //
+    // }
     //socket end
     person.username = null
     person.password = null

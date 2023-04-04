@@ -97,8 +97,14 @@ body {
   font-size: 10pt;
   word-break: break-word;
 }
+.form-sublabel-opacity0 {
+  opacity: 0;
+}
 .form-sublabel-password {
   color: #b9241e;
+}
+.form-sublabel-check {
+  color: #008800 !important;
 }
 .form-btn {
   background: #b9241e;
@@ -107,12 +113,12 @@ body {
   text-align: center;
   text-decoration: none;
 }
-.form-btn-confirm {
+.form-btn-type_button {
   background: #cbcbcb;
   margin-top: 2em;
   color: #000;
 }
-.form-btn-confirm:hover {
+.form-btn-type_button:hover {
   background: rgba(0, 0, 0, 0.5);
 }
 .form-btn:hover {
